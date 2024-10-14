@@ -7,10 +7,10 @@ import {
   QueryClientProvider,
   queryClient,
 } from '@/components/query-client-provider';
-// import {
-//   AuthProvider,
-//   useAuthContext,
-// } from '@/modules/auth/components/auth-provider';
+import {
+  AuthProvider,
+  useAuthContext,
+} from '@/modules/auth/components/auth-provider';
 import { routeTree } from '@/routeTree.gen';
 
 import './index.css';
@@ -34,14 +34,14 @@ declare module '@tanstack/react-router' {
 }
 
 const AuthRouterProvider = () => {
-  // const auth = useAuthContext();
+  const auth = useAuthContext();
 
   return (
     <RouterProvider
       router={router}
       context={{
         queryClient,
-        auth: undefined,
+        auth,
       }}
     />
   );
@@ -51,9 +51,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider>
       <CookiesProvider>
-        {/* <AuthProvider> */}
-        <AuthRouterProvider />
-        {/* </AuthProvider> */}
+        <AuthProvider>
+          <AuthRouterProvider />
+        </AuthProvider>
       </CookiesProvider>
     </QueryClientProvider>
   </StrictMode>
